@@ -7,4 +7,27 @@ class UserService with ChangeNotifier {
   User get user => this._user!;
   bool get existUser => ( this._user != null ) ? true : false;
 
+  set user(User user) {
+    this._user = user;
+    notifyListeners();
+  }
+
+  void changeAge(int age) {
+    if(existUser) {
+      this._user!.age = age;
+      notifyListeners();
+    } 
+  }
+
+  void removeUser() {
+    this._user = null;
+    notifyListeners();
+  }
+
+  void addProfession() {
+    if(existUser) {
+      this._user!.professions!.add('Profession ${ this._user!.professions!.length +1 }');
+      notifyListeners();
+    }
+  }
 }

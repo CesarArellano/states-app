@@ -8,12 +8,19 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userService = Provider.of<UserService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Page One'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => userService.removeUser(),
+          )
+        ],
       ),
-      body: Provider.of<UserService>(context).existUser
-        ? UserInfo()
+      body: userService.existUser
+        ? UserInfo(userService.user)
         : Center(child: Text('No user info')),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.chevron_right),
@@ -24,6 +31,10 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInfo extends StatelessWidget {
+  final User user;
+
+  UserInfo(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,14 +46,14 @@ class UserInfo extends StatelessWidget {
         children: [
           Text('General', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),
-          ListTile( title: Text('Name')),
-          ListTile( title: Text('Age')),
+          ListTile( title: Text('Name ${ user.name }')),
+          ListTile( title: Text('Age ${ user.age }')),
           SizedBox(height: 20.0),
           Text('Professions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),
-          ListTile( title: Text('Profession One')),
-          ListTile( title: Text('Profession Two')),
-          ListTile( title: Text('Profession Three')),
+          ...user.professions!.map(
+            (profession) => ListTile(title: Text(profession))
+          ).toList()
         ],
       )
     );
