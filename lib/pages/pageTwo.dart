@@ -9,7 +9,14 @@ class PageTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page Two'),
+        title: StreamBuilder(
+          stream: userService.userStream,
+          builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+            return snapshot.hasData
+              ? Text('Name: ${snapshot.data!.name}')
+              : Text('Page Two');
+          },
+        ),
       ),
       body: Center(
         child: Column(
