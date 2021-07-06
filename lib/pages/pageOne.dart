@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:states_app/models/user.dart';
+
+import 'package:states_app/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
 
@@ -8,7 +12,9 @@ class PageOne extends StatelessWidget {
       appBar: AppBar(
         title: Text('Page One'),
       ),
-      body: UserInfo(),
+      body: Provider.of<UserService>(context).existUser
+        ? UserInfo()
+        : Center(child: Text('No user info')),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.chevron_right),
         onPressed: () => Navigator.pushNamed(context, 'pageTwo')
