@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:states_app/models/user.dart';
 import 'package:states_app/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
@@ -10,7 +11,7 @@ class PageOne extends StatelessWidget {
         title: Text('Page One'),
       ),
       body: userService.existUser
-        ? UserInfo()
+        ? UserInfo(userService.user)
         : Center(child: Text('No user info')),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.chevron_right),
@@ -21,6 +22,10 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInfo extends StatelessWidget {
+  final User user;
+
+  UserInfo(this.user); 
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +37,8 @@ class UserInfo extends StatelessWidget {
         children: [
           Text('General', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),
-          ListTile( title: Text('Name')),
-          ListTile( title: Text('Age')),
+          ListTile( title: Text('Name: ${ user.name }')),
+          ListTile( title: Text('Age: ${ user.age }')),
           SizedBox(height: 20.0),
           Text('Professions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),

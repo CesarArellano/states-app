@@ -7,5 +7,6 @@ class User {
     this.name = 'No name',
     this.age = 1,
     this.professions
-  }); 
+  })
+  : assert( name.length != 1 );
 }

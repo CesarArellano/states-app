@@ -11,6 +11,10 @@ class _UserService {
     this._user = user;
   }
 
+  void changeAge(int age) {
+    this._user!.age = age;
+  }
+
 }
 
 final userService = new _UserService();
