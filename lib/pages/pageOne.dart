@@ -7,9 +7,16 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userCubit = BlocProvider.of<UserCubit>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Page One'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => userCubit.deleteUser()
+          )
+        ],
       ),
       body: BodyScaffold(),
       floatingActionButton: FloatingActionButton(

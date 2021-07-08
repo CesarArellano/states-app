@@ -36,13 +36,13 @@ class PageTwo extends StatelessWidget {
             MaterialButton(
               child: Text('Change Age', style: TextStyle(color: Colors.white)),
               color: Colors.red,
-              onPressed: () {}
+              onPressed: () => userCubit.changeAge(22)
             ),
             SizedBox(height: 10.0),
             MaterialButton(
               child: Text('Add profession', style: TextStyle(color: Colors.white)),
               color: Colors.green,
-              onPressed: () {}
+              onPressed: () => userCubit.addProfession()
             ),
           ],
         ),

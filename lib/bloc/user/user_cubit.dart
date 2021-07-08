@@ -10,5 +10,29 @@ class UserCubit extends Cubit<UserState> {
   void selectUser(User user) {
     emit(ActiveUser(user));
   }
+
+  void changeAge(int age) {
+    final currentState = state;
+    if ( currentState is ActiveUser ) {
+      final newUser = currentState.user.copyWith(age: age);
+      emit(ActiveUser(newUser));
+    }
+  }
+
+  void addProfession() {
+    final currentState = state;
+    if ( currentState is ActiveUser ) {
+      final newList = [ 
+        ...currentState.user.professions!, 
+        'Profession ${ currentState.user.professions!.length + 1}'
+      ];
+
+      final newUser = currentState.user.copyWith(professions: newList);
+      emit(ActiveUser(newUser));
+    }
+  }
   
+  void deleteUser() {
+    emit(InitialUser());
+  }
 }
